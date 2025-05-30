@@ -8,6 +8,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+async def mock_search() -> str:
+    """Mock search function that returns a placeholder result."""
+    return "mock_search"
+
 @asynccontextmanager
 async def build_agent():
 
@@ -18,7 +22,8 @@ async def build_agent():
                 model="gemini-2.0-flash-exp",
             ),
             name="pirate_agent",
-            prompt=CALENDAR_AGENT_PROMPT.render(today=today)
+            prompt=CALENDAR_AGENT_PROMPT.render(today=today),
+            tools=[mock_search],
         )
         
     yield graph
